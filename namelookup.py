@@ -84,18 +84,18 @@ def main():
       print_header()
       name=form.getvalue("name").upper()
       ltype=form.getvalue("type_select")
-      if ltype=="female":
+      if ltype=="Female":
         data=femaleMap.lookup10(name)
-      elif ltype=="male":
+      elif ltype=="Male":
         data=maleMap.lookup10(name)
       else:
         data=lastMap.lookup10(name)
-        result=""
-        for namedata in data:
-          if len(result) > 0:
-            result+=","
-          result+=namedata[1].name+","+namedata[1].percent+","+namedata[1].rank
-        print(result)
+      result=""
+      for namedata in data:
+         if len(result) > 0:
+           result+=","
+         result+=namedata[1].name+","+namedata[1].percent+","+namedata[1].rank
+      print(result)
   else:
       print("Error in submission")
         
