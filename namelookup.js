@@ -41,18 +41,14 @@ function clearResults() {
 function getMatches() {
     if ($('#search').val().length < 2) return;
     $('#searchresults').empty();
-    name = $("#search").val();
-    params = "name=" + name + "&type_select=" + searchType;
-      $.ajax(
-      {
-      type: "POST",
-      url: "/cgi-bin/skon_namelookup.py",
-      data: params,
-      dataType: "text",
-      success:  processResults,
-      error: function(request, ajaxOptions, thrownError)
-	  {
-	      $("#debug").text("error with get:"+request+thrownError);
-	  }
-      });
+    searchStr = $("#search").val();
+    console.log("lookup:"+name);
+    params = "name=" + searchStr + "&type_select=" + searchType;
+    $.ajax({
+        url: '/cgi-bin/namelookup.py?name='+searchStr+'&type_select='+searchType,
+	type: "get",
+        dataType: 'text',
+        success: processResults,
+        error: function(){alert("Error: Something went wrong");}
+    });
 }

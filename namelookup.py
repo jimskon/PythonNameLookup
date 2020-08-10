@@ -1,15 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 # namelookup.py - Program to display name statistics
 # James Skon, 2019
-#!/usr/bin/env python
 
-import cgi;
+import cgi
 import cgitb
 cgitb.enable()
 
-
 from sortedcontainers import SortedDict
-filePath="/home/class/SoftDev/namedata/"
+filePath="/home/skon/PythonNameLookup/namedata/"
 
 class nameEntry:
   """
@@ -39,12 +37,16 @@ class NameMap:
     create a new list of names with data
     given an index within range of 0..num-1
     """
-    names = open(filePath+nameFile)
+    try:
+      names = open(filePath+nameFile)
+    except IOError:
+      print("Error opening file:"+filePath+nameFile)
     self.namemap=SortedDict()
     for line in names:
       nameData=nameEntry(line)
       self.namemap[nameData.name]=nameData
     return
+
   def lookup(self,name):
     """
     lookup name in map
@@ -72,31 +74,34 @@ def lookup(name,data):
   print(data[name])
 
 def print_header():
-    print ("""Content-type: text/html\n""")
+    print ("Content-type:text/html\n\n")
 
 def main():
+  print_header()
+
   femaleMap=NameMap('dist.female.first')
   maleMap=NameMap('dist.male.first')
   lastMap=NameMap('dist.all.last')
 
   form = cgi.FieldStorage()
   if (form.getvalue("name") and form.getvalue("type_select")):
-      print_header()
-      name=form.getvalue("name").upper()
-      ltype=form.getvalue("type_select")
-      if ltype=="Female":
-        data=femaleMap.lookup10(name)
-      elif ltype=="Male":
-        data=maleMap.lookup10(name)
-      else:
-        data=lastMap.lookup10(name)
-      result=""
-      for namedata in data:
-         if len(result) > 0:
-           result+=","
-         result+=namedata[1].name+","+namedata[1].percent+","+namedata[1].rank
-      print(result)
+    name=form.getvalue("name").upper()
+    ltype=form.getvalue("type_select")
+  
+    if ltype=="Female":
+      data=femaleMap.lookup10(name)
+    elif ltype=="Male":
+      data=maleMap.lookup10(name)
+    else:
+      data=lastMap.lookup10(name)
+
+    result=""
+    for namedata in data:
+      if len(result) > 0:
+        result+=","
+      result+=namedata[1].name+","+namedata[1].percent+","+namedata[1].rank
+    print(result)
   else:
-      print("Error in submission")
-        
+    print("Error in submission")
+
 main()
