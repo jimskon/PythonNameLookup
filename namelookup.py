@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # namelookup.py - Program to display name statistics
-# James Skon, 2019
+# James Skon, 2020
 
 import cgi
 import cgitb
