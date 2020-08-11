@@ -8,9 +8,9 @@ $(document).ready(function () {
 
     $("#clear").click(clearResults);
 
-    $(".dropdown-menu li a").click(function(){
+    $(".dropdown-menu a").click(function(){
 	console.log("pick!"+$(this).text());
-	$(this).parents(".btn-group").find('.selection').text($(this).text());
+	$(this).parents(".dropdown").find('.selection').text($(this).text());
 	searchType=$(this).text();
     });
 });
@@ -49,6 +49,9 @@ function getMatches() {
 	type: "get",
         dataType: 'text',
         success: processResults,
-        error: function(){alert("Error: Something went wrong");}
+	error: function(request, ajaxOptions, thrownError)
+          {
+              $("#debug").text("error with get:"+request+thrownError);
+          }
     });
 }
