@@ -45,7 +45,7 @@ function getMatches() {
     console.log("lookup:"+name);
     params = "name=" + searchStr + "&type_select=" + searchType;
     $.ajax({
-        url: '/cgi-bin/namelookup.py?name='+searchStr+'&type_select='+searchType,
+        url: '/cgi-bin/skon_namelookup.py?name='+searchStr+'&type_select='+searchType,
 	type: "get",
         dataType: 'text',
         success: processResults,
