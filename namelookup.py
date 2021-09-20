@@ -79,9 +79,10 @@ def print_header():
 def main():
   print_header()
 
-  femaleMap=NameMap('dist.female.first')
-  maleMap=NameMap('dist.male.first')
-  lastMap=NameMap('dist.all.last')
+  path = '/home/class/SoftDev/namedata/'
+  femaleMap=NameMap(path+'dist.female.first')
+  maleMap=NameMap(path+'dist.male.first')
+  lastMap=NameMap(path+'dist.all.last')
 
   form = cgi.FieldStorage()
   if (form.getvalue("name") and form.getvalue("type_select")):
