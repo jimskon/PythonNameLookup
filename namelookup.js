@@ -81,7 +81,7 @@ function getMatches(){
     // Clear the previous results
     document.querySelector('#searchresults').innerHTML = "";
 
-    fetch('/cgi-bin/skon_namelookup.cgi?name='+searchStr+'&type_select='+searchType, {
+    fetch('/cgi-bin/skon_namelookup.py?name='+searchStr+'&type_select='+searchType, {
 	method: 'get'
     })
 	.then (response => response.json() )

@@ -79,10 +79,9 @@ def print_header():
 def main():
   print_header()
 
-  path = '/home/class/SoftDev/namedata/'
-  femaleMap=NameMap(path+'dist.female.first')
-  maleMap=NameMap(path+'dist.male.first')
-  lastMap=NameMap(path+'dist.all.last')
+  femaleMap=NameMap('dist.female.first')
+  maleMap=NameMap('dist.male.first')
+  lastMap=NameMap('dist.all.last')
 
   form = cgi.FieldStorage()
   if (form.getvalue("name") and form.getvalue("type_select")):
@@ -95,12 +94,12 @@ def main():
       data=maleMap.lookup10(name)
     else:
       data=lastMap.lookup10(name)
-
-    result=""
+    result='{"results":['
     for namedata in data:
-      if len(result) > 0:
-        result+=","
-      result+=namedata[1].name+","+namedata[1].percent+","+namedata[1].rank
+      result+='{"name":"'+namedata[1].name+'","percent":'+namedata[1].percent+',"rank":'+namedata[1].rank+'},'
+    # remove the extra comma at the end
+    result = result[:-1]  
+    result+=']}'
     print(result)
   else:
     print("Error in submission")
