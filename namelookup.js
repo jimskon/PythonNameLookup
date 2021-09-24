@@ -54,22 +54,6 @@ function clearResults() {
     document.querySelector('#searchresults').innerHTML = "";
 }
 
-function getMatches_old(){
-    console.log("getMatches!");
-    var searchStr=document.querySelector('#search').value;
-    console.log(searchStr+":"+searchType);
-    if (searchStr.length < 2) return;
-    document.querySelector('#searchresults').innerHTML = "";
-    $.ajax({
-	url: '/cgi-bin/skon_namelookup.cgi?name='+searchStr+'&type_select='+searchType,
-	type: "get",
-	dataType: 'text',
-	success: processResults,
-	error: function(){alert("Error: Something went wrong");}
-    });
-
-}
-
 function getMatches(){
     console.log("getMatches!");
     var searchStr=document.querySelector('#search').value;
