@@ -5,9 +5,10 @@
 import cgi
 import cgitb
 cgitb.enable()
+cgitb.enable(display=0, logdir="/log")
 
 from sortedcontainers import SortedDict
-filePath="/home/class/SoftDev/namedata/"
+filePath="/var/www/html/PythonNameLookup/namedata/"
 
 class nameEntry:
   """
@@ -78,7 +79,6 @@ def print_header():
 
 def main():
   print_header()
-
   femaleMap=NameMap('dist.female.first')
   maleMap=NameMap('dist.male.first')
   lastMap=NameMap('dist.all.last')
@@ -87,7 +87,6 @@ def main():
   if (form.getvalue("name") and form.getvalue("type_select")):
     name=form.getvalue("name").upper()
     ltype=form.getvalue("type_select")
-  
     if ltype=="Female":
       data=femaleMap.lookup10(name)
     elif ltype=="Male":

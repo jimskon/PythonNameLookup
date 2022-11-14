@@ -1,15 +1,14 @@
 # PythonNameLookup
-Set up Apache 2 for CGI
-https://code-maven.com/set-up-cgi-with-apache
+A web program with Python to lookup name statistics
 
-Must install libraries for www-data!
+Must do the following:
 
-sudo mkdir /var/www/.local
+ - sudo pip install sortedcontainers  # Install sorted containers for all users
+ - sudo mkdir /var/www/html/PythonNameLookup
+ - sudo chown ubuntu /var/www/html/PythonNameLookup/
+ - sudo apt install libcgicc-dev
+ - sudo chmod 777 /usr/lib/cgi-bin/
+ - sudo a2enmod cgi. # enable cgi
+ - sudo systemctl restart apache2
 
-sudo mkdir /var/www/.cache
-
-sudo chown www-data.www-data /var/www/.local
-
-sudo chown www-data.www-data /var/www/.cache
-
-sudo -H -u www-data pip3 install sortedcontainers
+Then use use "make" to set it up.
